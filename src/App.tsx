@@ -1,10 +1,21 @@
+import Navbar from "./components/Navbar";
+import Offer from "./sections/Offer";
+import Footer from "./sections/Footer";
+import BookNow from "./sections/BookNow";
+import Hero from "./sections/Hero";
+import Gallery from "./sections/Gallery";
 
 const App = () => {
   return (
-    <div className="text-center text-5xl text-green-800">
-      Hello
+    <div>
+      <Navbar />
+      <Hero />
+      <Gallery />
+      <BookNow />
+      <Offer />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
