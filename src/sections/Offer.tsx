@@ -39,7 +39,7 @@ const Offer = () => {
               key={idx}
               className="w-[240px] flex flex-col items-center text-center"
             >
-              <img src={data.img} className="w-20" />
+              <img src={data.img} className="w-20 animate-bounce" />
               <p className="font-bold text-xl pt-8">{data.heading}</p>
               <p className="text-sm tracking-wide">{data.sub}</p>
             </div>

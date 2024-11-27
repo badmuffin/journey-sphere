@@ -9,7 +9,6 @@ const BookNow = () => {
     <section className="relative w-full h-screen flex justify-between items-center px-10 bg-[url('assets/otherImg/treeBg.png')] bg-cover text-white">
       {/* gradients for the background */}
       <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-black via-[#0000008d] to-[#00000017]"></div>
-
       <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black via-[#000000c7] to-[#00000017]"></div>
 
       <div className="z-10 px-10 w-[600px] flex flex-col gap-10 justify-center items-left">
@@ -28,9 +27,9 @@ const BookNow = () => {
         </button>
       </div>
       <div className="z-10 w-[600px] flex flex-wrap flex-row-reverse justify-center items-center">
-        <img src={img1} />
-        <img src={img2} />
-        <img src={img3} />
+        <img src={img1} className="hover:scale-105 duration-300" />
+        <img src={img2} className="hover:scale-105 duration-300" />
+        <img src={img3} className="hover:scale-105 duration-300" />
       </div>
     </section>
   );
