@@ -127,31 +127,38 @@ const Hero = () => {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            transition={{ type: "spring", duration: 1.0 }}
+            transition={{ type: "spring", duration: 1.6 }}
             src={imageData[bgIndex].image}
             className="absolute top-0 w-full h-full object-cover"
           />
+          <div className="absolute top-0 w-full h-screen bg-[#0000008b]"></div>
         </AnimatePresence>
-        <div className="absolute top-0 w-full h-screen bg-[#0000008b]"></div>
       </div>
       <div className="flex flex-col gap-6 lg:flex-row h-screen justify-center items-center px-10">
         {/* left content */}
-        <div className=" w-full lg:w-[50%] flex flex-col gap-4 z-10">
-          <h1 className="text-[3rem] lg:text-[5rem] font-bold tracking-wider">
+        <div className=" w-full lg:w-[50%] flex flex-col justify-center items-center gap-4 z-10">
+          <h1 className="text-4xl lg:text-6xl font-bold tracking-wider">
             {imageData[bgIndex].name}
           </h1>
-          <p className="tracking-wider w-full text-sm lg:text-lg lg:w-[600px]">
+          <p className="tracking-wider w-full text-sm lg:text-lg lg:w-[600px] text-center">
             {imageData[bgIndex].title}
           </p>
-          <motion.button whileHover={{ scale: 1.06}} whileTap={{scale: 0.96}} className=" px-10 py-2 w-[200px] text-white border-2 rounded-2xl border-white bg-[#ffffff47]">
+          <motion.button
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.96 }}
+            className=" px-10 py-2 w-[200px] text-white border-2 rounded-2xl border-white bg-[#ffffff47]"
+          >
             Explore
           </motion.button>
         </div>
         {/* carousel */}
-        <div className="w-[50%] z-10 flex lg:flex-row justify-center gap-10 ">
+        <div className="w-full lg:w-[50%] z-10 flex lg:flex-row justify-center gap-10 ">
           <Slider ref={sliderRef} {...settings} className="w-full">
             {imageData.map((data, idx) => (
-              <div key={idx} className="min-w-[7rem] h-[18rem] px-2">
+              <div
+                key={idx}
+                className=" min-w-[3.5rem] lg:min-w-[7rem] h-[8rem] lg:h-[18rem] px-2"
+              >
                 <img
                   src={data.image}
                   alt={data.name}
@@ -162,16 +169,16 @@ const Hero = () => {
           </Slider>
         </div>
       </div>
-      <div className="flex gap-4 absolute bottom-0 lg:bottom-10 lg:left-[54%]">
+      <div className="flex gap-4 absolute bottom-10 left-[34%] lg:bottom-28 lg:left-[54%]">
         <button
           onClick={handlePrevClick}
-          className="p-3 bg-[#000000aa] rounded-full text-white"
+          className="px-4 py-1 bg-[#000000aa] rounded-full text-white"
         >
           prev
         </button>
         <button
           onClick={handleNextClick}
-          className="p-3 bg-[#000000aa] rounded-full text-white"
+          className="px-4 py-1 bg-[#000000aa] rounded-full text-white"
         >
           next
         </button>

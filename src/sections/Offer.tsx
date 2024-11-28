@@ -33,7 +33,7 @@ const Offer = () => {
           </h2>
         </div>
 
-        <div className="my-20 flex justify-evenly items-center">
+        <div className="my-20 flex justify-center items-center">
           {offer.map((data, idx) => (
             <div
               key={idx}

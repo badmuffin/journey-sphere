@@ -13,14 +13,14 @@ const Bottombar = () => {
   ];
 
   return (
-    <nav className=" text-white min-h-10 max-w-full bg-transparent flex justify-around items-center">
+    <nav className=" text-white w-full bg-transparent flex justify-around items-center">
       <div className="flex gap-2 hover:cursor-pointer">
         <img src={logo} />
         <span className=" text-base font-sans tracking-tight justify-center items-center">
           JOURNEY SPHERE
         </span>
       </div>
-      <div className="flex justify-center text-base gap-6">
+      <div className="md:flex justify-center text-sm lg:text-base gap-6 hidden md:visible">
         {navlinks.map((data, idx) => (
           <li
             key={idx}

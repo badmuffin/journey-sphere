@@ -9,8 +9,8 @@ const GalleryCard = () => {
   return (
     <>
       {gal.map((data:string, idx:number) => (
-        <div className="hover:scale-110 duration-300" key={idx}>
-          <img src={data} className="w-[280px] h-[380px]" />
+        <div className="" key={idx}>
+          <img src={data} className=" w-[100px] lg:w-[280px] h-[140px] lg:h-[380px] hover:scale-110 duration-300" />
         </div>
       ))}
     </>
