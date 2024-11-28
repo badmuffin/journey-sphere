@@ -12,7 +12,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="z-20 text-white min-h-10 max-w-full sticky top-0 py-6 flex justify-around items-center">
+    <nav className="z-20 text-white min-h-10 max-w-full sticky top-0 py-6 flex flex-col lg:flex-row justify-around items-center">
       <div className="flex gap-2 hover:cursor-pointer">
         <img src={logo} />
         <span className=" text-base font-sans tracking-tight justify-center items-center">

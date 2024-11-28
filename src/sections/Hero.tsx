@@ -9,7 +9,9 @@ import hero6 from "../assets/mainImg/kashmir.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
 import { useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 
 const Hero = () => {
   const imageData = [
@@ -57,6 +59,34 @@ const Hero = () => {
     },
   ];
 
+  // const responsive = [
+  //   [
+  //     {
+  //       breakpoint: 1024,
+  //       settings: {
+  //         slidesToShow: 3,
+  //         slidesToScroll: 3,
+  //         infinite: true,
+  //         dots: true,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 600,
+  //       settings: {
+  //         slidesToShow: 2,
+  //         slidesToScroll: 2,
+  //         initialSlide: 2,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 480,
+  //       settings: {
+  //         slidesToShow: 1,
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //   ],
+  // ];
   const settings = {
     dots: true,
     infinite: true,
@@ -65,6 +95,7 @@ const Hero = () => {
     slidesToScroll: 1,
     autoplay: false,
     arrows: false,
+    // responsive: responsive
   };
 
   const sliderRef = useRef<Slider | null>(null);
@@ -86,31 +117,38 @@ const Hero = () => {
   const bgIndex = (currIndex - 1 + imageData.length) % imageData.length;
 
   return (
-    <section className="relative w-full h-screen text-white">
+    <section className="relative w-full h-screen text-white bg-black">
       <Navbar />
       {/* background */}
       <div>
-        <img
-          src={imageData[bgIndex].image}
-          className="absolute top-0 w-full h-full object-cover"
-        />
+        <AnimatePresence>
+          <motion.img
+            key={imageData[bgIndex].image}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ type: "spring", duration: 1.0 }}
+            src={imageData[bgIndex].image}
+            className="absolute top-0 w-full h-full object-cover"
+          />
+        </AnimatePresence>
         <div className="absolute top-0 w-full h-screen bg-[#0000008b]"></div>
       </div>
-      <div className="flex h-screen justify-center items-center px-10">
+      <div className="flex flex-col gap-6 lg:flex-row h-screen justify-center items-center px-10">
         {/* left content */}
-        <div className="w-[50%] flex flex-col gap-4 z-10">
-          <h1 className="text-[5rem] font-bold tracking-wider">
+        <div className=" w-full lg:w-[50%] flex flex-col gap-4 z-10">
+          <h1 className="text-[3rem] lg:text-[5rem] font-bold tracking-wider">
             {imageData[bgIndex].name}
           </h1>
-          <p className="tracking-wider w-[600px]">
+          <p className="tracking-wider w-full text-sm lg:text-lg lg:w-[600px]">
             {imageData[bgIndex].title}
           </p>
-          <button className=" px-10 py-2 w-[200px] text-white border-2 rounded-2xl border-white bg-[#ffffff47]">
+          <motion.button whileHover={{ scale: 1.06}} whileTap={{scale: 0.96}} className=" px-10 py-2 w-[200px] text-white border-2 rounded-2xl border-white bg-[#ffffff47]">
             Explore
-          </button>
+          </motion.button>
         </div>
         {/* carousel */}
-        <div className="w-[50%] z-10 flex justify-center gap-10 ">
+        <div className="w-[50%] z-10 flex lg:flex-row justify-center gap-10 ">
           <Slider ref={sliderRef} {...settings} className="w-full">
             {imageData.map((data, idx) => (
               <div key={idx} className="min-w-[7rem] h-[18rem] px-2">
@@ -124,7 +162,7 @@ const Hero = () => {
           </Slider>
         </div>
       </div>
-      <div className="flex gap-4 absolute bottom-10 left-[54%]">
+      <div className="flex gap-4 absolute bottom-0 lg:bottom-10 lg:left-[54%]">
         <button
           onClick={handlePrevClick}
           className="p-3 bg-[#000000aa] rounded-full text-white"
