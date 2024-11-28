@@ -6,6 +6,11 @@ import hero4 from "../assets/mainImg/africa.png";
 import hero5 from "../assets/mainImg/brazil.png";
 import hero6 from "../assets/mainImg/kashmir.png";
 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { useRef, useState } from "react";
+
 const Hero = () => {
   const imageData = [
     {
@@ -52,13 +57,41 @@ const Hero = () => {
     },
   ];
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: false,
+    arrows: false,
+  };
+
+  const sliderRef = useRef<Slider | null>(null);
+  const [currIndex, setCurrIndex] = useState(0);
+
+  const handlePrevClick = () => {
+    // console.log("Prev button");
+    sliderRef.current?.slickPrev();
+    setCurrIndex(
+      (prevIndex) => (prevIndex - 1 + imageData.length) % imageData.length
+    );
+  };
+  const handleNextClick = () => {
+    // console.log("Next Button");
+    sliderRef.current?.slickNext();
+    setCurrIndex((prevIndex) => (prevIndex + 1) % imageData.length);
+  };
+
+  const bgIndex = (currIndex - 1 + imageData.length) % imageData.length;
+
   return (
     <section className="relative w-full h-screen text-white">
       <Navbar />
       {/* background */}
       <div>
         <img
-          src={hero1}
+          src={imageData[bgIndex].image}
           className="absolute top-0 w-full h-full object-cover"
         />
         <div className="absolute top-0 w-full h-screen bg-[#0000008b]"></div>
@@ -66,29 +99,44 @@ const Hero = () => {
       <div className="flex h-screen justify-center items-center px-10">
         {/* left content */}
         <div className="w-[50%] flex flex-col gap-4 z-10">
-          <h1 className="text-[5rem] font-bold tracking-wider">INDONESIA</h1>
+          <h1 className="text-[5rem] font-bold tracking-wider">
+            {imageData[bgIndex].name}
+          </h1>
           <p className="tracking-wider w-[600px]">
-            Explore Indonesia, a stunning archipelago of 17,000+ islands where
-            natural beauty and cultural diversity blend seamlessly. From lush
-            jungles to serene beaches, it's a destination of unforgettable
-            adventures and tranquility.
+            {imageData[bgIndex].title}
           </p>
           <button className=" px-10 py-2 w-[200px] text-white border-2 rounded-2xl border-white bg-[#ffffff47]">
             Explore
           </button>
         </div>
         {/* carousel */}
-        <div className="w-[50%] z-10">
-          {imageData.map((data) => (
-            <div className="min-w-[14rem] h-[20rem]">
-              <img
-                src={data.image}
-                alt={data.name}
-                className="w-full h-full object-cover rounded-3xl"
-              />
-            </div>
-          ))}
+        <div className="w-[50%] z-10 flex justify-center gap-10 ">
+          <Slider ref={sliderRef} {...settings} className="w-full">
+            {imageData.map((data, idx) => (
+              <div key={idx} className="min-w-[7rem] h-[18rem] px-2">
+                <img
+                  src={data.image}
+                  alt={data.name}
+                  className="w-full h-full object-cover rounded-3xl"
+                />
+              </div>
+            ))}
+          </Slider>
         </div>
+      </div>
+      <div className="flex gap-4 absolute bottom-10 left-[54%]">
+        <button
+          onClick={handlePrevClick}
+          className="p-3 bg-[#000000aa] rounded-full text-white"
+        >
+          prev
+        </button>
+        <button
+          onClick={handleNextClick}
+          className="p-3 bg-[#000000aa] rounded-full text-white"
+        >
+          next
+        </button>
       </div>
     </section>
   );
