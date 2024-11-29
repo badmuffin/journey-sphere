@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+// import Navbar from "../components/Navbar";
 import hero1 from "../assets/mainImg/indonesia.png";
 import hero2 from "../assets/mainImg/arizona.png";
 import hero3 from "../assets/mainImg/egypt.png";
@@ -118,13 +118,13 @@ const Hero = () => {
 
   return (
     <section className="relative w-full h-screen text-white bg-black">
-      <Navbar />
+      {/* <Navbar /> */}
       {/* background */}
       <div>
         <AnimatePresence>
           <motion.img
             key={imageData[bgIndex].image}
-            initial={{ scale: 0, opacity: 0 }}
+            initial={{ scale: 0.25, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             transition={{ type: "spring", duration: 1.6 }}
