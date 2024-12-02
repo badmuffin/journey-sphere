@@ -22,16 +22,32 @@ const Navbar = () => {
   useEffect(() => {
     if (inputVal) {
       setFilterDatas(
-        data
-          .filter((dt) =>
-            dt.name.toLowerCase().includes(inputVal.toLowerCase())
-          )
-          .slice(0, 6)
+        data.filter((dt) =>
+          dt.name.toLowerCase().includes(inputVal.toLowerCase())
+        )
       );
-    } else {
-      data.slice(0, 6);
     }
   }, [inputVal, data]);
+
+  // hightlight text will be our current inputVal
+  const highlightText = (text: string, hightlight: string) => {
+    const regex = new RegExp(`(${hightlight})`, "i"); // i - case insensitive
+    const parts = text.split(regex);
+
+    return (
+      <>
+        {parts.map((part, idx) =>
+          part.toLowerCase() === hightlight.toLowerCase() ? (
+            <span key={idx} className="text-red-600">
+              {part}
+            </span>
+          ) : (
+            part
+          )
+        )}
+      </>
+    );
+  };
 
   return (
     <nav className="z-20 text-white min-h-10 bg-[#000000ec] max-w-full sticky top-0  px-6 py-4 flex flex-row justify-between md:justify-around items-center">
@@ -66,7 +82,7 @@ const Navbar = () => {
             onClick={() => setDropDownVisible(!dropDownVisible)}
           />
           {dropDownVisible && (
-            <div className="absolute top-10 right-0 w-[300px] bg-white text-black p-4 rounded-xl shadow-lg z-50">
+            <div className="absolute top-10 right-0 w-[300px] h-[400px] overflow-scroll bg-white text-black p-4 rounded-xl shadow-lg z-50">
               <input
                 type="text"
                 placeholder="Search here..."
@@ -75,12 +91,12 @@ const Navbar = () => {
                 className="w-full p-2 border rounded-md focus:outline-none"
               />
               <div className="mt-2 flex flex-col gap-1">
-                {filterDatas.map((country) => (
+                {filterDatas.map((coutry) => (
                   <p
-                    key={country.id}
+                    key={coutry.id}
                     className="p-2 hover:bg-gray-200 rounded-md cursor-pointer"
                   >
-                    {country.name}
+                    {highlightText(coutry.name, inputVal)}
                   </p>
                 ))}
               </div>

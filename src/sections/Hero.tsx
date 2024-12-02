@@ -95,6 +95,9 @@ const Hero = () => {
     slidesToScroll: 1,
     autoplay: false,
     arrows: false,
+    draggable: false, // Disable dragging with the mouse
+    swipe: false, // Disable touch swipe
+    touchMove: false, // Prevent touch-based scrolling
     // responsive: responsive
   };
 
